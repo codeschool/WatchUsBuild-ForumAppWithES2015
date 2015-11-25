@@ -9,7 +9,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ui = {
   renderPosts: function renderPosts(posts) {
-    console.log(posts);
+    console.log("Posts: " + JSON.stringify(posts, null, 2) + " ");
   }
 };
 
@@ -24,8 +24,24 @@ Object.defineProperty(exports, "__esModule", {
 var Post = { findAll: findAll };
 
 function findAll() {
+  var url = "http://localhost:3000/posts"; // extract base URI to constant
+  var request = new XMLHttpRequest();
+
   return new Promise(function (resolve, reject) {
-    resolve("OK");
+
+    request.open('GET', url, true);
+
+    request.onload = function () {
+      if (request.status >= 200 && request.status < 400) {
+        resolve(JSON.parse(request.response));
+      }
+    };
+
+    request.onerror = function () {
+      reject(new Error("Error fetching posts"));
+    };
+
+    request.send();
   });
 }
 
