@@ -10,7 +10,7 @@ let ui = {
   }
 };
 
-
+// TODO: fix XSS breach
 function articleElement(title, lastReply){
   return`<article class='post'>
     <h2 class='post-title'>

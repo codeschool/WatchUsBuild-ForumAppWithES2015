@@ -76,6 +76,7 @@ var ui = {
   }
 };
 
+// TODO: fix XSS breach
 function articleElement(title, lastReply) {
   return ("<article class='post'>\n    <h2 class='post-title'>\n      " + title + "\n    </h2>\n    <p class='post-meta'>\n      last reply on " + lastReply + "\n    </p>\n  </article>").trim();
 }
