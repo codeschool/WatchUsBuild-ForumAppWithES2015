@@ -10,7 +10,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/codeschool/babel-with-gulp.git"
+    "url": "git+ssh://git@github.com/codeschool/ES2015SoupToBits"
   },
   "keywords": [
     "babel",
