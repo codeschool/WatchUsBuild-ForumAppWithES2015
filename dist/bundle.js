@@ -7,24 +7,68 @@ var _post2 = _interopRequireDefault(_post);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/*
+let articleTemplate = `
+<article class='post'>
+  <h2 class='post-title'>
+    ${postTitle}
+  </h2>
+  <p class='post-meta'>
+    ${lastReply}
+  </p>
+</article>
+`.trim();
+*/
+
 var ui = {
   renderPosts: function renderPosts(posts) {
-    console.log("Posts: " + JSON.stringify(posts, null, 2) + " ");
+    var target = document.querySelector(".container");
+
+    var article = document.createElement("article");
+    article.className = "post";
+
+    var h2 = document.createElement("h2");
+    h2.className = "post-title";
+    var postTitle = document.createTextNode("I am a post title w00t");
+    h2.appendChild(postTitle);
+
+    var p = document.createElement("p");
+    p.className = "post-meta";
+    var lastReply = document.createTextNode("last reply on 1997-07-03");
+    p.appendChild(lastReply);
+
+    article.appendChild(h2);
+    article.appendChild(p);
+
+    target.appendChild(article);
   }
 };
 
 _post2.default.findAll().then(ui.renderPosts);
 
-},{"./post":2}],2:[function(require,module,exports){
+},{"./post":3}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var BASE_URI = "http://localhost:3000";
+
+exports.BASE_URI = BASE_URI;
+
+},{}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = require("./constants");
+
 var Post = { findAll: findAll };
 
 function findAll() {
-  var url = "http://localhost:3000/posts"; // extract base URI to constant
+  var url = _constants.BASE_URI + "/posts";
   var request = new XMLHttpRequest();
 
   return new Promise(function (resolve, reject) {
@@ -47,4 +91,4 @@ function findAll() {
 
 exports.default = Post;
 
-},{}]},{},[1]);
+},{"./constants":2}]},{},[1]);
