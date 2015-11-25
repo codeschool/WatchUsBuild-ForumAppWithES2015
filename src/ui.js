@@ -1,3 +1,5 @@
+import xssFilters from "xss-filters";
+
 let ui = {
   renderPosts(posts){
     let target = document.querySelector(".container");
@@ -10,14 +12,16 @@ let ui = {
   }
 };
 
-// TODO: fix XSS breach
 function articleElement(title, lastReply){
+  let safeTitle = xssFilters.inHTMLData(title);
+  let safeLastReply = xssFilters.inHTMLData(lastReply);
+
   return`<article class='post'>
+      ${safeTitle}
     <h2 class='post-title'>
-      ${title}
     </h2>
     <p class='post-meta'>
-      last reply on ${lastReply}
+      last reply on ${safeLastReply}
     </p>
   </article>`.trim();
 }
