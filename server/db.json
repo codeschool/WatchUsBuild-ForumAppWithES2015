@@ -2,17 +2,17 @@
   "posts": [
     {
       "id": 1,
-      "body": "In hybrid moments, give me a moment",
+      "title": "In hybrid moments, give me a moment",
       "lastReply": "1997-07-15"
     },
     {
       "id": 2,
-      "body": "Sound system gonna bring me back up",
+      "title": "Sound system gonna bring me back up",
       "lastReply": "1991-07-01"
     },
     {
       "id": 3,
-      "body": "When I'm out walkin', I strut my stuff",
+      "title": "When I'm out walkin', I strut my stuff",
       "lastReply": "1983-04-19"
     }
   ]

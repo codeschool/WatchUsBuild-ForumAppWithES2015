@@ -5,48 +5,15 @@ var _post = require("./post");
 
 var _post2 = _interopRequireDefault(_post);
 
+var _ui = require("./ui");
+
+var _ui2 = _interopRequireDefault(_ui);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-let articleTemplate = `
-<article class='post'>
-  <h2 class='post-title'>
-    ${postTitle}
-  </h2>
-  <p class='post-meta'>
-    ${lastReply}
-  </p>
-</article>
-`.trim();
-*/
+_post2.default.findAll().then(_ui2.default.renderPosts);
 
-var ui = {
-  renderPosts: function renderPosts(posts) {
-    var target = document.querySelector(".container");
-
-    var article = document.createElement("article");
-    article.className = "post";
-
-    var h2 = document.createElement("h2");
-    h2.className = "post-title";
-    var postTitle = document.createTextNode("I am a post title w00t");
-    h2.appendChild(postTitle);
-
-    var p = document.createElement("p");
-    p.className = "post-meta";
-    var lastReply = document.createTextNode("last reply on 1997-07-03");
-    p.appendChild(lastReply);
-
-    article.appendChild(h2);
-    article.appendChild(p);
-
-    target.appendChild(article);
-  }
-};
-
-_post2.default.findAll().then(ui.renderPosts);
-
-},{"./post":3}],2:[function(require,module,exports){
+},{"./post":3,"./ui":4}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -91,4 +58,28 @@ function findAll() {
 
 exports.default = Post;
 
-},{"./constants":2}]},{},[1]);
+},{"./constants":2}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ui = {
+  renderPosts: function renderPosts(posts) {
+    var target = document.querySelector(".container");
+
+    var postElements = posts.map(function (post) {
+      return articleElement(post.title, post.lastReply);
+    });
+
+    target.innerHTML = postElements.join("");
+  }
+};
+
+function articleElement(title, lastReply) {
+  return ("<article class='post'>\n    <h2 class='post-title'>\n      " + title + "\n    </h2>\n    <p class='post-meta'>\n      last reply on " + lastReply + "\n    </p>\n  </article>").trim();
+}
+
+exports.default = ui;
+
+},{}]},{},[1]);
