@@ -1186,7 +1186,7 @@ function articleElement(title, lastReply) {
   var safeTitle = _xssFilters2.default.inHTMLData(title);
   var safeLastReply = _xssFilters2.default.inHTMLData(lastReply);
 
-  return ("<article class='post'>\n      " + safeTitle + "\n    <h2 class='post-title'>\n    </h2>\n    <p class='post-meta'>\n      last reply on " + safeLastReply + "\n    </p>\n  </article>").trim();
+  return ("<article class='post'>\n    <h2 class='post-title'>\n      " + safeTitle + "\n    </h2>\n    <p class='post-meta'>\n      last reply on " + safeLastReply + "\n    </p>\n  </article>").trim();
 }
 
 exports.default = ui;

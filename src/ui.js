@@ -17,8 +17,8 @@ function articleElement(title, lastReply){
   let safeLastReply = xssFilters.inHTMLData(lastReply);
 
   return`<article class='post'>
-      ${safeTitle}
     <h2 class='post-title'>
+      ${safeTitle}
     </h2>
     <p class='post-meta'>
       last reply on ${safeLastReply}
