@@ -1216,9 +1216,9 @@ var ui = {
       var avatar = user.avatar;
 
       return activeUsersTemplate(name, avatar);
-    }).join("");
+    });
 
-    target.innerHTML = elements;
+    target.innerHTML = elements.join("");
   }
 };
 

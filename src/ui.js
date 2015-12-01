@@ -18,9 +18,9 @@ let ui = {
     let elements = users.map( (user) => {
       let { name, avatar } = user;
       return activeUsersTemplate(name, avatar);
-    }).join("");
+    });
 
-    target.innerHTML = elements;
+    target.innerHTML = elements.join("");
   }
 };
 
