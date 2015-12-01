@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "In hybrid moments, give me a moment",
-      "lastReply": "1997-07-15"
+      "lastReply": "<img src=x onerror=\"alert('XSS Attack!');\" />"
     },
     {
       "id": 2,
@@ -14,6 +14,20 @@
       "id": 3,
       "title": "When I'm out walkin', I strut my stuff",
       "lastReply": "1983-04-19"
+    }
+  ],
+  "activeUsers": [
+    {
+      "name": "Sam",
+      "avatar": "avatar.jpg"
+    },
+    {
+      "name": "Tyler",
+      "avatar": "avatar.jpg"
+    },
+    {
+      "name": "Brook",
+      "avatar": "avatar.jpg"
     }
   ]
 }

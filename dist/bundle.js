@@ -1100,41 +1100,16 @@ exports.uriFragmentInHTMLComment = exports.uriComponentInHTMLComment;
 },{}],2:[function(require,module,exports){
 "use strict";
 
-var _post = require("./post");
-
-var _post2 = _interopRequireDefault(_post);
-
-var _ui = require("./ui");
-
-var _ui2 = _interopRequireDefault(_ui);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_post2.default.findAll().then(_ui2.default.renderPosts);
-
-},{"./post":4,"./ui":5}],3:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var BASE_URI = "http://localhost:3000";
-
-exports.BASE_URI = BASE_URI;
-
-},{}],4:[function(require,module,exports){
-"use strict";
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var _constants = require("./constants");
 
-var Post = { findAll: findAll };
+var API = { fetch: fetch };
 
-function findAll() {
-  var url = _constants.BASE_URI + "/posts";
+function fetch(path) {
+  var url = _constants.BASE_URI + "/" + path;
   var request = new XMLHttpRequest();
 
   return new Promise(function (resolve, reject) {
@@ -1155,9 +1130,61 @@ function findAll() {
   });
 }
 
+exports.default = API;
+
+},{"./constants":4}],3:[function(require,module,exports){
+"use strict";
+
+var _post = require("./post");
+
+var _post2 = _interopRequireDefault(_post);
+
+var _user = require("./user");
+
+var _user2 = _interopRequireDefault(_user);
+
+var _ui = require("./ui");
+
+var _ui2 = _interopRequireDefault(_ui);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_post2.default.findAll().then(_ui2.default.renderPosts);
+
+_user2.default.findAllActive().then(_ui2.default.renderActiveUsers);
+
+},{"./post":5,"./ui":6,"./user":7}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var BASE_URI = "http://localhost:3000";
+
+exports.BASE_URI = BASE_URI;
+
+},{}],5:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _api = require("./api");
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Post = { findAll: findAll };
+
+function findAll() {
+  return _api2.default.fetch("posts");
+}
+
 exports.default = Post;
 
-},{"./constants":3}],5:[function(require,module,exports){
+},{"./api":2}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1179,6 +1206,19 @@ var ui = {
     });
 
     target.innerHTML = postElements.join("");
+  },
+  renderActiveUsers: function renderActiveUsers(users) {
+
+    var target = document.querySelector(".sidebar-content");
+
+    var elements = users.map(function (user) {
+      var name = user.name;
+      var avatar = user.avatar;
+
+      return activeUsersTemplate(name, avatar);
+    }).join("");
+
+    target.innerHTML = elements;
   }
 };
 
@@ -1186,9 +1226,40 @@ function articleElement(title, lastReply) {
   var safeTitle = _xssFilters2.default.inHTMLData(title);
   var safeLastReply = _xssFilters2.default.inHTMLData(lastReply);
 
-  return ("<article class='post'>\n    <h2 class='post-title'>\n      " + safeTitle + "\n    </h2>\n    <p class='post-meta'>\n      last reply on " + safeLastReply + "\n    </p>\n  </article>").trim();
+  return "<article class='post'>\n    <h2 class='post-title'>\n      " + safeTitle + "\n    </h2>\n    <p class='post-meta'>\n      last reply on " + safeLastReply + "\n    </p>\n  </article>";
+}
+
+function activeUsersTemplate(name, avatar) {
+
+  var safeName = _xssFilters2.default.inHTMLData(name);
+  var safeAvatar = _xssFilters2.default.inHTMLData(avatar);
+
+  var template = "\n    <div class=\"active-avatar\">\n    <img width=\"54\" src=\"assets/images/" + safeAvatar + "\">\n    <h5 class=\"post-author\">" + safeName + "</h5>\n    </div>";
+
+  return template;
 }
 
 exports.default = ui;
 
-},{"xss-filters":1}]},{},[2]);
+},{"xss-filters":1}],7:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _api = require("./api");
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var User = { findAllActive: findAllActive };
+
+function findAllActive() {
+  return _api2.default.fetch("activeUsers");
+}
+
+exports.default = User;
+
+},{"./api":2}]},{},[3]);

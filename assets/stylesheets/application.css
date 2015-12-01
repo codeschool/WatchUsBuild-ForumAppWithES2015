@@ -37,7 +37,7 @@ h1 {
 .sidebar {
   background: rgba(17, 17, 17, 0.5);
   display: inline-block;
-  margin: 2em 0 0 2em;
+  margin: 0 0 0 2em;
   max-width: 260px;
   padding: 1em;
   text-align: left;
