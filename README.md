@@ -1,7 +1,8 @@
-# ES2015 Soup to Bits
+# ES2015 Watch Us Build
 
-App for the ES2015 Soup to Bits Episode
+*We changed the name of this series to "Watch Us Build," so you may see an occasional reference to its former name ("Soup to Bits") in this repository.*
 
+This repository contains the sample app built in the [Watch Us Build episode](https://www.codeschool.com/screencasts/build-a-forum-web-app-with-es2015) for the [ES2015: The Shape of JavaScript to Come course](https://www.codeschool.com/courses/es2015-the-shape-of-javascript-to-come).
 
 # Installing
 
